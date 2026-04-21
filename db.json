@@ -1,3 +1,74 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": 0,
+      "name": "hgfrdesw",
+      "email": "gref@fer.crnf",
+      "phone": "84183",
+      "password": "nfrefre"
+    },
+    {
+      "id": 1,
+      "name": "frefmner",
+      "email": "renfre@rere.cerc",
+      "phone": "4128312",
+      "password": "rregre2"
+    },
+    {
+      "id": 2,
+      "name": "grefre",
+      "email": "refre@fre.reefre",
+      "phone": "312321",
+      "password": "frefre"
+    },
+    {
+      "id": 3,
+      "name": "frefrewe",
+      "email": "greref@fre.ref",
+      "phone": "48123",
+      "password": "frnfre"
+    },
+    {
+      "id": 4,
+      "name": "gerfrf",
+      "email": "referwrvcew@frefe.crec",
+      "phone": "8132181",
+      "password": "frenfre"
+    },
+    {
+      "id": 5,
+      "name": "gerreger",
+      "email": "frefre@frefre.frefr",
+      "phone": "84872131",
+      "password": "fernfrjen"
+    },
+    {
+      "id": 6,
+      "name": "fewfew",
+      "email": "freofer@frefre.refer",
+      "phone": "8413773412",
+      "password": "frefre"
+    },
+    {
+      "id": 7,
+      "name": "refre",
+      "email": "frefre@frefre.crecer",
+      "phone": "83821321",
+      "password": "gerfreef"
+    },
+    {
+      "id": 8,
+      "name": "gtrefwdq",
+      "email": "gregre@frefre.com",
+      "phone": "4324823",
+      "password": "frmefre"
+    },
+    {
+      "id": 9,
+      "name": "ijuihyghj",
+      "email": "fregrege@gregre.crecre",
+      "phone": "48839243",
+      "password": "firefren"
+    }
+  ]
 }

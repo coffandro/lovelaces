@@ -1,11 +1,15 @@
 <script lang="ts">
-    
+	
 </script>
 
 <form method="POST" class="flex flex-col gap-1 content-stretch m-2">
 	<label>
 		Name
 		<input name="name" type="name" class="p-1 border rounded-xl">
+	</label>
+	<label>
+		Icon
+		<input name="icon" type="file" class="p-1 border rounded-xl">
 	</label>
 	<label>
 		Email

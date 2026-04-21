@@ -2,7 +2,7 @@ export interface User {
     id: number;
     
     name: string;
-    //desc: string;
+    //bio: string;
     //iconPath: string;
     
     email: string;
