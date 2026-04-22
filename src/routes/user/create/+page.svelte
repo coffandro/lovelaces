@@ -2,7 +2,7 @@
 	
 </script>
 
-<form method="POST"enctype="multipart/form-data" class="flex flex-col gap-1 content-stretch m-2">
+<form method="POST"enctype="multipart/form-data" class="flex flex-col gap-1 content-stretch">
 	<label>
 		Name
 		<input name="name" type="name" class="p-1 border rounded-xl">

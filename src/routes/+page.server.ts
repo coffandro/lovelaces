@@ -1,18 +1,12 @@
 import type { PageServerLoad } from './$types';
 import * as db from '$lib/server/database';
-import type { User } from '$lib/user';
 
-export const load: PageServerLoad = async ({ params }) => {
-    let error: string|null = null;
-
-    const users: User[] = await db.getUsers();
-
-    if (!users) {
-        error = `Users not found`;
-    }
+export const load: PageServerLoad = async () => {
+    const users = await db.getUsers();
+    const convos = await db.getConvos();
 
     return {
-        users: users,
-        error: error
+        users,
+        convos,
     };
 };
