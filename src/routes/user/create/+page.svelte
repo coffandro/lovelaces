@@ -2,7 +2,7 @@
 	
 </script>
 
-<form method="POST" class="flex flex-col gap-1 content-stretch m-2">
+<form method="POST"enctype="multipart/form-data" class="flex flex-col gap-1 content-stretch m-2">
 	<label>
 		Name
 		<input name="name" type="name" class="p-1 border rounded-xl">
@@ -23,5 +23,5 @@
 		Password
 		<input name="password" type="password" class="p-1 border rounded-xl">
 	</label>
-	<button class="p-2 border rounded-lg">Log in</button>
+	<button class="p-2 border rounded-lg">Submit</button>
 </form>

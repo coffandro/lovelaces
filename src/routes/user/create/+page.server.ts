@@ -1,40 +1,50 @@
 import type { User } from '$lib/user';
 import type { Actions } from './$types';
 import * as db from "$lib/server/database"
-import { writeLogo } from '$lib/files';
+import { fail } from '@sveltejs/kit';
 import * as fs from "node:fs";
 import * as path from 'node:path';
-import { IMG_DIR } from "$lib/config";
+import { USER_IMG_DIR } from "$lib/config";
 
 export const actions = {
 	default: async ({ cookies, request }) => {
-		const data = await request.formData();
-
-		console.log(data);
+		const data = Object.fromEntries(await request.formData());
 		
-		const name = data.get('name') as string;
-		const email = data.get('email') as string;
-		const phone = data.get('phone') as string;
-		const password = data.get('password') as string;
-		
-		let logo = data.get("icon");
-		let logoPath = '';
-		let logoUrl = '';
 		if (
-			logo &&
-			typeof logo === 'object' &&
-			typeof logo.arrayBuffer === 'function'
+			!(data.icon as File).name ||
+			(data.icon as File).name === 'undefined'
 		) {
-			const arrayBuffer = await logo.arrayBuffer();
-			const buffer = Buffer.from(arrayBuffer);
-			logoUrl = logo.name;
-			logoPath = path.join(IMG_DIR, logoUrl);
-			fs.writeFileSync(logoPath, buffer);
-		} else {
-			console.log("error with logo ", logo);
+			return fail(400, {
+				error: true,
+				message: 'You must provide a file to upload'
+			});
 		}
 
-		let user: User = { id: -1, name, email, phone, password };
-		db.addUser(user);
+    	const {
+			icon,
+			name,
+			email,
+			phone,
+			password,
+		} = data as {
+			icon: File,
+			name: string,
+			email: string,
+			phone: string,
+			password: string,
+		};
+
+		const icon_string = icon.name.split(".");
+		const file_type = icon_string[icon_string.length - 1];
+
+		
+		let user: User = { id: -1, name, iconExt: file_type, email, phone, password };
+		const id = await db.addUser(user);
+
+		fs.writeFileSync(path.join(USER_IMG_DIR, id + "." + file_type), Buffer.from(await icon.arrayBuffer()));
+
+		return {
+			success: true
+		};
 	},
 } satisfies Actions;
