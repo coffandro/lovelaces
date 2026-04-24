@@ -2,6 +2,7 @@ import { type User } from "$lib/user";
 import { JSONFilePreset } from "lowdb/node";
 import { type Low } from "lowdb";
 import type { Conversation, Message } from "$lib/conversation";
+import { publish } from "$lib/server/messageHub";
 
 interface Data {
     users: User[];
@@ -41,6 +42,16 @@ export async function getUser(id: number): Promise<User | null> {
     return null;
 }
 
+export async function getUserFromEmail(email: string): Promise<User | null> {
+    for (const user of (await getUsers())) {
+        if (user.email == email) {
+            return user;
+        }
+    }
+
+    return null;
+}
+
 export async function addConvo(convo: Conversation) {
     if (convo.id == -1) {
         convo.id = db.data.convos.length;
@@ -66,16 +77,33 @@ export async function startConversation(firstUser: User, secondUser: User): Prom
     return convo;
 }
 
-export async function getConvos(): Promise<Conversation[]> {
+export async function endConversation(convo: Conversation) {
+    removeConvo(convo.id);
+
+    // Sentinel userId=-1 signals "conversation ended" to any connected clients.
+    publish(convo.id, { userId: -1, message: '__ended__' });
+}
+
+export function getConvos(): Conversation[] {
     return db.data.convos;
 }
 
-export async function getConvo(id: number): Promise<Conversation | null> {
-    if (id >= 0 && id < db.data.convos.length) {
-        return db.data.convos[id];
-    }
+export async function getConvo(id: number): Promise<Conversation | undefined> {
+    const convo = db.data.convos.find((convo) => {
+        return convo.id == id;
+    });
 
-    return null;
+    return convo;
+}
+
+export async function removeConvo(id: number) {
+    const convo = await getConvo(id);
+    if (!convo) return;
+
+    if (db.data.convos.includes(convo)) {
+        db.data.convos.splice(id);
+        await db.write();
+    }
 }
 
 export async function appendMessage(convoId: number, msg: Message): Promise<Conversation | null> {

@@ -1,4 +1,4 @@
-const TEN_MINUTES = 10 * 60000 // Mmmm, magic numbers
+const TEN_MINUTES = 0.5 * 60000 // Mmmm, magic numbers
 
 export interface Message {
     message: string;
@@ -10,13 +10,18 @@ export interface Conversation {
     // Our users
     firstId: number;
     secondId: number;
-    
+
     messages: Message[]
 
     // Time stuffs
     startTime: number;
+    ended?: boolean;
+}
+
+export function remainingTime(convo: Conversation): number {
+    return convo.startTime + TEN_MINUTES - Date.now();
 }
 
 export function canContinue(convo: Conversation): boolean {
-    return convo.startTime + TEN_MINUTES < Date.now();
+    return convo.startTime + TEN_MINUTES >= Date.now();
 }

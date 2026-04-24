@@ -1,74 +1,72 @@
 <script lang="ts">
-    import { GetUserIcon } from '$lib/user';
-    import type { PageProps } from './$types';
+	import { GetUserIcon } from '$lib/user';
+	import { FontAwesomeIcon } from 'fontawesome-svelte';
+	import type { PageProps } from './$types';
+	import { faUser } from '@fortawesome/free-solid-svg-icons';
+	import Button from '$lib/components/button.svelte';
+	import { enhance } from '$app/forms';
+	import { page } from '$app/state';
+	import InputField from '$lib/components/inputField.svelte';
 
-    let { data }: PageProps = $props();
-
-    function nameFor(id: number): string {
-        return data.users[id]?.name ?? `User ${id}`;
-    }
+	let { data, form }: PageProps = $props();
 </script>
 
-<header class="flex items-center justify-between">
-    <nav class="flex gap-2">
-        <a href="/user/create" class="p-1 border rounded-xl">Add User</a>
-        <a href="/convo/start" class="p-1 border rounded-xl">Start Conversation</a>
-    </nav>
-</header>   
+<div class="flex h-screen flex-col p-2">
+	<header class="mb-5 flex">
+		<nav class="flex w-full justify-between">
+			<div class="grow">
+				<h1 class="text-2xl font-bold">10-minute love</h1>
+			</div>
+			{#if data.user}
+				<div class="flex grow justify-end gap-2">
+					<a class="flex items-center justify-items-center" href={`/user/${0}`}>
+						<FontAwesomeIcon icon={faUser} size="lg" />
+					</a>
+					<a class="flex items-center justify-items-center" href={`/user/${0}`}>
+						<FontAwesomeIcon icon={faUser} size="lg" />
+					</a>
+				</div>
+			{/if}
+		</nav>
+	</header>
 
-<section>
-    <h2 class="text-lg font-medium mb-2">Conversations</h2>
-    {#if data.convos.length === 0}
-        <p class="text-sm text-gray-500">No conversations yet.</p>
-    {:else}
-        <ul class="flex flex-col gap-2">
-            {#each data.convos as convo}
-                <li class="border rounded-lg p-3 flex items-center justify-between">
-                    <div>
-                        <div class="font-medium">
-                            {nameFor(convo.firstId)} with {nameFor(convo.secondId)}
-                        </div>
-                        <div class="text-xs text-gray-500">
-                            {convo.messages.length} message{convo.messages.length === 1 ? '' : 's'}
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <a
-                            href={`/convo/${convo.id}?as=${convo.firstId}`}
-                            class="text-sm border rounded px-2 py-1"
-                        >
-                            Open as {nameFor(convo.firstId)}
-                        </a>
-                        <a
-                            href={`/convo/${convo.id}?as=${convo.secondId}`}
-                            class="text-sm border rounded px-2 py-1"
-                        >
-                            Open as {nameFor(convo.secondId)}
-                        </a>
-                    </div>
-                </li>
-            {/each}
-        </ul>
-    {/if}
-</section>
+	{#if !data.user}
+		<section class="flex grow flex-col">
+			<form use:enhance method="POST" class="flex grow flex-col content-stretch gap-1">
+				<h1 class="text-xl">Please log in</h1>
 
-<section>
-    <h2 class="text-lg font-medium mb-2">Users</h2>
-    {#if data.users.length === 0}
-        <p class="text-sm text-gray-500">No users yet.</p>
-    {:else}
-        <div class="flex gap-2 flex-wrap">
-            {#each data.users as user}
-                <div class="p-2 border-2 rounded-lg w-40">
-                    <img
-                        src={GetUserIcon(user)}
-                        alt="{user.name} icon"
-                        class="w-full h-24 object-cover rounded"
-                    />
-                    <div class="mt-1 font-medium truncate">{user.name}</div>
-                    <div class="text-xs text-gray-500 truncate">{user.email}</div>
-                </div>
-            {/each}
-        </div>
-    {/if}
-</section>
+				<InputField text="Email" id="email" type="email" />
+				<InputField text="Password" id="password" type="password" />
+
+				{#if form?.error}
+					<div class="text-black/50">
+						<p>{form.message}</p>
+					</div>
+				{/if}
+
+				<div class="grow"></div>
+
+				<footer class="flex">
+					<Button type="submit" classes="grow" text="Submit"></Button>
+				</footer>
+			</form>
+		</section>
+	{:else}
+		<section>
+			<h2 class="mb-2 text-lg font-medium">Users</h2>
+			<div class="flex flex-wrap gap-2">
+				<div class="w-40 rounded-lg border-2 p-2">
+					<img
+						src={GetUserIcon(data.user)}
+						alt="{data.user.name} icon"
+						class="h-24 w-full rounded object-cover"
+					/>
+					<div class="mt-1 truncate font-medium">{data.user.name}</div>
+					<div class="truncate text-xs text-gray-500">{data.user.email}</div>
+				</div>
+			</div>
+		</section>
+
+		<footer></footer>
+	{/if}
+</div>

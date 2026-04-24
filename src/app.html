@@ -1,12 +1,17 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="text-scale" content="scale" />
-		%sveltekit.head%
-	</head>
-	<body data-sveltekit-preload-data="hover" class="p-5 flex flex-col h-screen">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="text-scale" content="scale" />
+	%sveltekit.head%
+</head>
+
+<body data-sveltekit-preload-data="hover" class="flex justify-center max-h-screen bg-black">
+	<div class="aspect-9/16 overflow-hidden h-screen border rounded-xl bg-white">
 		<div style="display: contents">%sveltekit.body%</div>
-	</body>
+	</div>
+</body>
+
 </html>

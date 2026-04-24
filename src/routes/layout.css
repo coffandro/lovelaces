@@ -1,1 +1,10 @@
 @import 'tailwindcss';
+
+@theme {
+    --font-display: InterVariable;
+
+    --color-lighter: #fe9393;
+    --color-light: #fe8182;
+    --color-main: #ff6665;
+    --color-dark: #fe5152;
+}
