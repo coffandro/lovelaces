@@ -6,6 +6,7 @@
 	import { FontAwesomeIcon } from 'fontawesome-svelte';
 	import { faSadTear } from '@fortawesome/free-solid-svg-icons';
 	import { MATCH_TIMEOUT_MS } from '$lib/matchmaking';
+	import Progress from '$lib/components/progress.svelte';
 
 	let { data }: PageProps = $props();
 	const TIMEOUT_S = Math.ceil(MATCH_TIMEOUT_MS / 1000);
@@ -32,6 +33,7 @@
 
 		interval = setInterval(() => {
 			secondsLeft = Math.max(0, secondsLeft - 1);
+			progress = 100 - (secondsLeft / TIMEOUT_S) * 100;
 		}, 1000);
 
 		try {
@@ -63,6 +65,8 @@
 		}
 	}
 
+	let progress: number = $state(0);
+
 	onMount(() => {
 		startSearch();
 	});
@@ -85,6 +89,7 @@
 		{#if status === 'searching'}
 			<h2 class="text-xl font-semibold">Scouring the multiverse...</h2>
 			<p>Hang tight! We're searching for your match.</p>
+			<Progress percentage={progress} />
 			<p class="font-mono text-2xl tabular-nums">{secondsLeft}s</p>
 			<div class="pt-4">
 				<Button text="Cancel" href="/" />
