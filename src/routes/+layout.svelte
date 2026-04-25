@@ -11,8 +11,8 @@
 
 <div>
 	<!-- Consider moving to front page instead of layout -->
-	<header class="mb-5 flex">
-		<nav class="flex w-full justify-between p-2">
+	<header class="flex p-2 pb-0">
+		<nav class="flex w-full justify-between rounded-lg bg-main p-2 text-white">
 			<div class="grow">
 				<h1 class="text-2xl font-bold">10-minute love</h1>
 			</div>
