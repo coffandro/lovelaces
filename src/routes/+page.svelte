@@ -52,7 +52,7 @@
 		</section>
 
 		<footer class="flex h-full pb-2">
-			<Button scale={3} classes="grow min-h-20" text="Search for match" href="" />
+			<Button scale={3} classes="grow min-h-20" text="Search for match" href="/search" />
 		</footer>
 	{/if}
 </div>
