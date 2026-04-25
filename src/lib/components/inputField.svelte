@@ -6,6 +6,7 @@
 		id,
 		min = '',
 		type = null,
+		scale = 2,
 		blurCallback = null,
 		classes = ''
 	} = $props();
@@ -18,7 +19,10 @@
 		cursorClass = 'cursor-text';
 	}
 
-	const styles = `grow rounded-lg border-2 border-b-3 border-light bg-lighter p-1 ${cursorClass} ${classes}`;
+	const styles = $derived(
+		`scaled grow rounded-lg border-light bg-lighter p-1 ${cursorClass} ${classes}`
+	);
+	const scaleStyle = $derived(`--scale: ${scale}`);
 </script>
 
 <label class="flex" for={id}>
@@ -31,6 +35,7 @@
 		{type}
 		{min}
 		class={styles}
+		style={scaleStyle}
 		bind:value={content}
 		onblur={(e) => {
 			if (blurCallback) {
@@ -39,3 +44,12 @@
 		}}
 	/>
 </label>
+
+<style>
+	.scaled {
+		border-style: solid;
+		border-width: calc(var(--scale) * 1px);
+		border-bottom-width: calc(var(--scale) * 1.5px);
+		font-size: calc(var(--scale) * 0.5rem);
+	}
+</style>
