@@ -18,7 +18,9 @@
 	{#if href != ''}
 		<a class={styles} {href}>
 			<FontAwesomeIcon {icon} size="lg" />
-			{text}
+			{#if text}
+				{text}
+			{/if}
 		</a>
 	{:else}
 		<button
@@ -31,7 +33,9 @@
 			}}
 		>
 			<FontAwesomeIcon {icon} size="lg" />
-			{text}
+			{#if text}
+				{text}
+			{/if}
 		</button>
 	{/if}
 {:else}
