@@ -14,14 +14,14 @@
 	} = $props();
 
 	const styles = $derived(
-		`btn flex justify-center items-center cursor-pointer rounded-lg border-light text-white bg-main p-2 hover:translate-y-0.2 active:translate-y-0.4 active:bg-dark ${classes}`
+		`btn flex justify-center items-center cursor-pointer rounded-lg border-light text-white bg-main p-2 hover:translate-y-0.2 active:translate-y-0.4 active:bg-dark`
 	);
 	const scaleStyle = $derived(`--scale: ${scale}`);
 </script>
 
 {#if !children}
 	{#if href != ''}
-		<a class={styles} {id} {href} style={scaleStyle}>
+		<a class="{classes} {styles}" {id} {href} style={scaleStyle}>
 			<FontAwesomeIcon {icon} size="lg" />
 			{#if text}
 				{text}
@@ -31,7 +31,7 @@
 		<button
 			{id}
 			{type}
-			class={styles}
+			class="{classes} {styles}"
 			style={scaleStyle}
 			onclick={(e) => {
 				if (callback) {
@@ -46,7 +46,7 @@
 		</button>
 	{/if}
 {:else}
-	<div class={styles} {id} style={scaleStyle}>
+	<div class="{classes} {styles}" {id} style={scaleStyle}>
 		{@render children()}
 	</div>
 {/if}
