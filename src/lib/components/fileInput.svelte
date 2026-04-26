@@ -7,16 +7,11 @@
 		type = 'file',
 		scale = 2,
 		blurCallback = null,
-		classes = ''
+		classes = '',
+		...rest
 	} = $props();
 
-	let cursorClass = 'cursor-pointer';
-
-	if (cursor == 'pointer') {
-		cursorClass = 'cursor-pointer';
-	} else if (cursor == 'text') {
-		cursorClass = 'cursor-text';
-	}
+	const cursorClass = $derived(cursor == 'text' ? 'cursor-text' : 'cursor-pointer');
 
 	const styles = $derived(
 		`scaled ${cursorClass} grow text-white rounded-lg border-light bg-main p-2 hover:translate-y-0.2 active:translate-y-0.4 active:bg-dark ${classes}`
@@ -32,6 +27,7 @@
 		{id}
 		name={id}
 		{type}
+		{...rest}
 		class={styles}
 		style={scaleStyle}
 		bind:value={content}

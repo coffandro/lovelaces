@@ -8,7 +8,8 @@
 		content = '',
 		scale = 2,
 		blurCallback = null,
-		classes = ''
+		classes = '',
+		...rest
 	} = $props();
 	const styles = $derived(
 		`scaled text-white grow rounded-lg border-light bg-lighter p-1 ${classes}`
@@ -30,18 +31,20 @@
 	<select
 		{id}
 		name={id}
+		{...rest}
 		class={styles}
 		style={scaleStyle}
-		bind:value={content}
 		onblur={(e) => {
 			if (blurCallback) {
-				blurCallback(e, content);
+				blurCallback(e, (e.currentTarget as HTMLSelectElement).value);
 			}
 		}}
 	>
-		<option value="" selected disabled hidden>Choose your {text}</option>
+		<option value="" selected={!content} disabled hidden>Pick your {text}</option>
 		{#each options as option, i}
-			<option value={option.value}>{option.label}</option>
+			<option value={option.value} selected={String(content) === String(option.value)}>
+				{option.label}
+			</option>
 		{/each}
 	</select>
 </label>

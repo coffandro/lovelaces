@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { content = '', text, id, scale = 2, blurCallback = null, classes = '' } = $props();
+	let { content = '', text, id, scale = 2, blurCallback = null, classes = '', ...rest } = $props();
 
 	const styles = $derived(
 		`scaled text-white grow rounded-lg border-light bg-lighter p-1 ${classes}`
@@ -14,6 +14,7 @@
 	<textarea
 		{id}
 		name={id}
+		{...rest}
 		class={styles}
 		style={scaleStyle}
 		bind:value={content}

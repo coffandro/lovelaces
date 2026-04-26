@@ -60,7 +60,7 @@ export function PronounString(pronouns: Pronoun[]): string {
         }
     }
 
-    return retArr.join(",");
+    return retArr.join(", ");
 }
 
 export function SexualityString(sexuality: Sexuality): string {
@@ -141,5 +141,5 @@ export function GetInterestedGenders(user: User): Gender[] {
 }
 
 export function GetUserIcon(user: User): string {
-    return `${API_USER_IMG_DIR}/${user.id}.${user.iconExt}`;
+    return `/${API_USER_IMG_DIR}/${user.id}.${user.iconExt}`;
 }

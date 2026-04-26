@@ -5,6 +5,8 @@
 		values,
 		labels = null,
 		labelFunction = null,
+		selected = [],
+		required = false,
 		scale = 2,
 		containerClasses = ''
 	} = $props();
@@ -20,6 +22,8 @@
 			label: labels != null ? labels[i] : labelFunction(value)
 		}))
 	);
+
+	let hasSelection: boolean = $state(false);
 </script>
 
 <fieldset class={containerStyles} style={scaleStyle}>
@@ -31,10 +35,26 @@
 			<input
 				class="h-4 w-4 rounded-lg"
 				style={scaleStyle}
-				name="{id}_{i}"
+				name={id}
 				id="{id}_{i}"
 				type="checkbox"
 				value={option.value}
+				checked={selected.includes(option.value)}
+				required={required && !hasSelection}
+				oninput={(e) => {
+					if (!required) {
+						return;
+					}
+
+					const target = e.currentTarget as HTMLInputElement;
+					const form = target.form;
+					if (!form) {
+						return;
+					}
+
+					hasSelection = form.querySelector(`input[name="${id}"]:checked`) != null;
+					target.setCustomValidity(hasSelection ? '' : 'Pick at least one option');
+				}}
 			/>
 			<label for="{id}_{i}">
 				{option.label}

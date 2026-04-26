@@ -7,7 +7,8 @@
 		type = null,
 		scale = 2,
 		blurCallback = null,
-		classes = ''
+		classes = '',
+		...rest
 	} = $props();
 	const styles = $derived(
 		`scaled text-white grow rounded-lg border-light bg-lighter p-1 ${classes}`
@@ -24,6 +25,7 @@
 		name={id}
 		{type}
 		{min}
+		{...rest}
 		class={styles}
 		style={scaleStyle}
 		bind:value={content}
