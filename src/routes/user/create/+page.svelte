@@ -1,65 +1,53 @@
 <script lang="ts">
 	import Button from '$lib/components/button.svelte';
+	import Dropdown from '$lib/components/dropdown.svelte';
 	import FileInput from '$lib/components/fileInput.svelte';
 	import InputField from '$lib/components/inputField.svelte';
-	import { Gender, Sexuality, Pronoun } from '$lib/user';
+	import MultiSelect from '$lib/components/multiSelect.svelte';
+	import TextArea from '$lib/components/textArea.svelte';
+	import { Gender, Sexuality, Pronoun, PronounString, GenderString } from '$lib/user';
 
 	let { form }: PageProps = $props();
 </script>
 
-<form method="POST" enctype="multipart/form-data" class="flex flex-col content-stretch gap-1 p-2">
+<form
+	method="POST"
+	enctype="multipart/form-data"
+	class="m-2 flex flex-col content-stretch gap-1 rounded-lg bg-main p-2"
+>
 	<InputField text="Name" id="name" type="text" />
 	<InputField text="Email" id="email" type="email" />
 	<InputField text="Password" id="password" type="password" />
 	<FileInput text="Image" id="icon" />
 	<InputField text="Phone" id="phone" type="tel" />
 
-	<!-- TODO: Make component -->
-	<label>
-		Bio
-		<textarea name="bio" class="rounded-xl border p-1"></textarea>
-	</label>
+	<TextArea text="Bio" id="bio" />
 
 	<InputField text="Age" id="age" type="number" min="0" />
 	<InputField text="City" id="city" type="text" />
 
-	<!-- TODO: Make component -->
-	<label>
-		Gender
-		<select name="gender" class="rounded-xl border p-1">
-			<option value={Gender.MAN}>Man</option>
-			<option value={Gender.WOMAN}>Woman</option>
-			<option value={Gender.NONBINARY}>Nonbinary</option>
-		</select>
-	</label>
+	<Dropdown
+		text="Gender"
+		id="gender"
+		values={[Gender.MAN, Gender.WOMAN, Gender.NONBINARY]}
+		labelFunction={GenderString}
+	/>
 
-	<!-- TODO: Make component -->
-	<fieldset class="rounded-xl border p-1">
-		<legend>Pronouns</legend>
-		<label>
-			<input name="pronouns" type="checkbox" value={Pronoun.SHE} />
-			She/Her
-		</label>
-		<label>
-			<input name="pronouns" type="checkbox" value={Pronoun.HE} />
-			He/Him
-		</label>
-		<label>
-			<input name="pronouns" type="checkbox" value={Pronoun.THEY} />
-			They/Them
-		</label>
-	</fieldset>
+	<MultiSelect
+		text="Pronouns"
+		id="Pronouns"
+		values={[Pronoun.SHE, Pronoun.HE, Pronoun.THEY]}
+		labelFunction={(value: Pronoun) => {
+			return PronounString([value]);
+		}}
+	/>
 
-	<!-- TODO: Make component -->
-	<label>
-		Sexuality
-		<select name="sexuality" class="rounded-xl border p-1">
-			<option value={Sexuality.STRAIGHT}>Straight</option>
-			<option value={Sexuality.GAY}>Gay</option>
-			<option value={Sexuality.BISEXUAL}>Bisexual</option>
-			<option value={Sexuality.PANSEXUAL}>Pansexual</option>
-		</select>
-	</label>
+	<Dropdown
+		text="Sexuality"
+		id="sexuality"
+		values={[Sexuality.STRAIGHT, Sexuality.GAY, Sexuality.BISEXUAL, Sexuality.PANSEXUAL]}
+		labels={['Straight', 'Gay', 'Bisexual', 'Pansexual']}
+	/>
 
 	{#if form?.error}
 		<div class="text-black/50">

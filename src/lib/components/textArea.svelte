@@ -1,14 +1,6 @@
 <script lang="ts">
-	let {
-		content = '',
-		text,
-		id,
-		min = '',
-		type = null,
-		scale = 2,
-		blurCallback = null,
-		classes = ''
-	} = $props();
+	let { content = '', text, id, scale = 2, blurCallback = null, classes = '' } = $props();
+
 	const styles = $derived(
 		`scaled text-white grow rounded-lg border-light bg-lighter p-1 ${classes}`
 	);
@@ -19,11 +11,9 @@
 	<span class="flex items-center pr-1 text-white">
 		{text}
 	</span>
-	<input
+	<textarea
 		{id}
 		name={id}
-		{type}
-		{min}
 		class={styles}
 		style={scaleStyle}
 		bind:value={content}
@@ -32,7 +22,7 @@
 				blurCallback(e, content);
 			}
 		}}
-	/>
+	></textarea>
 </label>
 
 <style>
