@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { GenderString, GetUserIcon, PronounString, SexualityString } from '$lib/user';
 	import type { PageProps } from './$types';
 	import Button from '$lib/components/button.svelte';
 	import { enhance } from '$app/forms';
@@ -51,8 +50,10 @@
 			<UserProfile user={data.user} />
 		</section>
 
-		<footer class="flex h-full pb-2">
-			<Button scale={3} classes="grow min-h-20" text="Search for match" href="/search" />
+		<footer class=" pb-2">
+			<div class="flex h-full rounded-lg bg-main p-2">
+				<Button scale={3} classes="grow min-h-20" text="Search for match" href="/search" />
+			</div>
 		</footer>
 	{/if}
 </div>
