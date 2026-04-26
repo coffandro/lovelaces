@@ -17,8 +17,8 @@
 			</div>
 			{#if data?.user}
 				<div class="flex grow justify-end gap-2">
-					<Button classes="aspect-square" icon={faCog} href={`/user/${data.user.id}/edit`} />
-					<Button classes="aspect-square" icon={faInfo} href={`/user/${data.user.id}/edit`} />
+					<Button classes="aspect-square" icon={faCog} href={`/user/edit`} />
+					<Button classes="aspect-square" icon={faInfo} href={`/use/edit`} />
 				</div>
 			{/if}
 		</nav>
