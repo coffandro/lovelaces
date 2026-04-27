@@ -76,13 +76,7 @@
 	});
 </script>
 
-<div class="flex max-h-screen flex-col gap-2 p-2">
-	<header class="flex">
-		<nav class="flex w-full justify-between rounded-lg bg-main p-2 text-white">
-			<h1 class="text-2xl font-bold">10-minute love</h1>
-		</nav>
-	</header>
-
+<div class="flex max-h-screen flex-col gap-2">
 	<section
 		class="row flex flex-col items-center justify-center gap-4 rounded-lg bg-main p-4 text-center text-white"
 	>

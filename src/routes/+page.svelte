@@ -3,27 +3,20 @@
 	import Button from '$lib/components/button.svelte';
 	import { enhance } from '$app/forms';
 	import InputField from '$lib/components/inputField.svelte';
-	import { faCog, faInfo } from '@fortawesome/free-solid-svg-icons';
+	import NavbarItems from '$lib/components/navitems/homeItems.svelte';
 	import UserProfile from '$lib/components/userProfile.svelte';
+	import { navbarItems } from '$lib/stores';
 
 	let { data, form }: PageProps = $props();
+
+	// Set the navbar items component for the layout to display
+	navbarItems.set({
+		component: NavbarItems,
+		props: { user: data.user }
+	});
 </script>
 
-<div class="flex max-h-screen grow flex-col gap-2 p-2">
-	<header class="flex">
-		<nav class="flex w-full justify-between rounded-lg bg-main p-2 text-white">
-			<div class="grow">
-				<h1 class="text-2xl font-bold">10-minute love</h1>
-			</div>
-			{#if data?.user}
-				<div class="flex grow justify-end gap-2">
-					<Button classes="aspect-square" icon={faCog} href={`/user/edit`} />
-					<Button classes="aspect-square" icon={faInfo} href={`/info`} />
-				</div>
-			{/if}
-		</nav>
-	</header>
-
+<div class="flex max-h-screen grow flex-col gap-2">
 	{#if !data.user}
 		<section class="flex grow flex-col">
 			<form use:enhance method="POST" class="flex grow flex-col content-stretch gap-1">
@@ -57,7 +50,7 @@
 			<UserProfile user={data.user} />
 		</section>
 
-		<footer class="pb-2">
+		<footer>
 			<div class="flex h-full rounded-lg bg-main p-2">
 				<Button scale={3} classes="grow min-h-20" text="Search for match" href="/search" />
 			</div>

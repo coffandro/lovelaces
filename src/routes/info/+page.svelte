@@ -2,7 +2,7 @@
 	import Button from '$lib/components/button.svelte';
 </script>
 
-<div class="flex grow flex-col gap-3 p-2 text-white">
+<div class="flex grow flex-col gap-3 text-white">
 	<div class="flex grow flex-col justify-between rounded-lg bg-main p-2 text-lg">
 		<h1 class="text-4xl">App information</h1>
 		<p>

@@ -21,11 +21,7 @@
 	}
 </script>
 
-<form
-	method="POST"
-	enctype="multipart/form-data"
-	class="m-2 flex grow flex-col content-stretch gap-3"
->
+<form method="POST" enctype="multipart/form-data" class="flex grow flex-col content-stretch gap-3">
 	<div class="flex flex-col gap-1 rounded-lg bg-main p-2">
 		<h1 class="text-2xl text-white">Account signup</h1>
 
