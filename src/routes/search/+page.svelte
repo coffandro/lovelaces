@@ -7,6 +7,7 @@
 	import { faSadTear } from '@fortawesome/free-solid-svg-icons';
 	import { MATCH_TIMEOUT_MS } from '$lib/matchmaking';
 	import Progress from '$lib/components/progress.svelte';
+	import Navbar from '$lib/components/navbar/navbar.svelte';
 
 	let { data }: PageProps = $props();
 	const TIMEOUT_S = Math.ceil(MATCH_TIMEOUT_MS / 1000);
@@ -77,6 +78,8 @@
 </script>
 
 <div class="flex max-h-screen flex-col gap-2">
+	<Navbar />
+
 	<section
 		class="row flex flex-col items-center justify-center gap-4 rounded-lg bg-main p-4 text-center text-white"
 	>

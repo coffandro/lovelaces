@@ -1,8 +1,12 @@
 <script lang="ts">
 	import Button from '$lib/components/button.svelte';
+	import IndexNavs from '$lib/components/navbar/index-navs.svelte';
+	import Navbar from '$lib/components/navbar/navbar.svelte';
 </script>
 
 <div class="flex grow flex-col gap-3 text-white">
+	<Navbar><IndexNavs /></Navbar>
+
 	<div class="flex grow flex-col justify-between rounded-lg bg-main p-2 text-lg">
 		<h1 class="text-4xl">App information</h1>
 		<p>

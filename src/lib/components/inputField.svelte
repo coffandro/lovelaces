@@ -1,13 +1,16 @@
 <script lang="ts">
 	let {
-		content = '',
+		content = $bindable(''),
 		text,
-		id,
+		id = null,
 		min = '',
 		type = null,
 		scale = 2,
 		blurCallback = null,
+		autocomplete = null,
+		placeholder = 'Type...',
 		classes = '',
+		outerClasses = '',
 		...rest
 	} = $props();
 	const styles = $derived(
@@ -16,7 +19,7 @@
 	const scaleStyle = $derived(`--scale: ${scale}`);
 </script>
 
-<label class="flex" for={id}>
+<label class="flex {outerClasses}" for={id}>
 	<span class="flex items-center pr-1 text-white">
 		{text}
 	</span>
@@ -26,6 +29,8 @@
 		{type}
 		{min}
 		{...rest}
+		{placeholder}
+		{autocomplete}
 		class={styles}
 		style={scaleStyle}
 		bind:value={content}

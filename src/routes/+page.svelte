@@ -3,21 +3,17 @@
 	import Button from '$lib/components/button.svelte';
 	import { enhance } from '$app/forms';
 	import InputField from '$lib/components/inputField.svelte';
-	import NavbarItems from '$lib/components/navitems/homeItems.svelte';
 	import UserProfile from '$lib/components/userProfile.svelte';
-	import { navbarItems } from '$lib/stores';
+	import Navbar from '$lib/components/navbar/navbar.svelte';
+	import IndexNavs from '$lib/components/navbar/index-navs.svelte';
 
 	let { data, form }: PageProps = $props();
-
-	// Set the navbar items component for the layout to display
-	navbarItems.set({
-		component: NavbarItems,
-		props: { user: data.user }
-	});
 </script>
 
 <div class="flex max-h-screen grow flex-col gap-2">
 	{#if !data.user}
+		<Navbar />
+
 		<section class="flex grow flex-col">
 			<form use:enhance method="POST" class="flex grow flex-col content-stretch gap-1">
 				<div class="flex flex-col gap-2 rounded-lg bg-main p-2">
@@ -46,6 +42,10 @@
 			</form>
 		</section>
 	{:else}
+		<Navbar>
+			<IndexNavs />
+		</Navbar>
+
 		<section>
 			<UserProfile user={data.user} />
 		</section>

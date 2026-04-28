@@ -8,6 +8,8 @@
 	import TextArea from '$lib/components/textArea.svelte';
 	import { Gender, Sexuality, Pronoun, PronounString, GenderString } from '$lib/user';
 	import type { PageProps } from './$types';
+	import Navbar from '$lib/components/navbar/navbar.svelte';
+	import IndexNavs from '$lib/components/navbar/index-navs.svelte';
 
 	let { data, form }: PageProps = $props();
 	const user = $derived(data.user);
@@ -49,7 +51,9 @@
 	}
 </script>
 
-<div class="flex grow flex-col">
+<div class="flex grow flex-col gap-2">
+	<Navbar><IndexNavs /></Navbar>
+
 	<form
 		method="POST"
 		action="?/save"

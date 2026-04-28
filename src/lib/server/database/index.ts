@@ -106,6 +106,7 @@ export function endConversation(convo: Conversation) {
     removeConvo(convo.id);
 
     // Sentinel userId=-1 signals "conversation ended" to any connected clients.
+    console.log(convo);
     publish(convo.id, { userId: -1, message: '__ended__' });
 }
 

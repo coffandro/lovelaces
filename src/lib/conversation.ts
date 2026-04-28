@@ -1,4 +1,4 @@
-const TEN_MINUTES = 0.5 * 60000 // Mmmm, magic numbers
+const TEN_MINUTES = 10 * 60_000 // Mmmm, magic numbers
 
 export interface Message {
     message: string;

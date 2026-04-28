@@ -10,18 +10,24 @@
 		icon = null,
 		scale = 2,
 		children = null,
+		disabled = false,
 		classes = ''
 	} = $props();
 
 	const styles = $derived(
-		`btn flex justify-center items-center cursor-pointer rounded-lg border-light text-white bg-main p-2 hover:translate-y-0.2 active:translate-y-0.4 active:bg-dark`
+		`flex justify-center items-center  rounded-lg border-light text-white p-2  ${disabled ? 'bg-light' : 'btn cursor-pointer bg-main hover:translate-y-0.2 active:translate-y-0.4 active:bg-dark'}`
 	);
 	const scaleStyle = $derived(`--scale: ${scale}`);
 </script>
 
 {#if !children}
 	{#if href != ''}
-		<a class="{classes} {styles}" {id} {href} style={scaleStyle}>
+		<a
+			class="{classes} {styles}"
+			{id}
+			href={disabled ? 'javascript:void(0)' : href}
+			style={scaleStyle}
+		>
 			<FontAwesomeIcon {icon} size="lg" />
 			{#if text}
 				{text}
@@ -29,6 +35,7 @@
 		</a>
 	{:else}
 		<button
+			{disabled}
 			{id}
 			{type}
 			class="{classes} {styles}"

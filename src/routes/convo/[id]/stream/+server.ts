@@ -13,7 +13,7 @@ export const GET: RequestHandler = async ({ params }) => {
     if (!convo) throw error(404, 'Conversation not found');
 
     const encoder = new TextEncoder();
-    let cleanup = () => {};
+    let cleanup = () => { };
 
     const stream = new ReadableStream<Uint8Array>({
         start(controller) {
