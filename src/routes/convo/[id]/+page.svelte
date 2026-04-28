@@ -85,8 +85,8 @@
 			}
 			messages = [...messages, msg];
 		});
-		es.onerror = () => {
-			// Browser auto-reconnects; ignore
+		es.onerror = (e) => {
+			console.error(e);
 		};
 		return () => es.close();
 	});
@@ -118,7 +118,7 @@
 				// Redirect to home page after successful deletion
 				window.location.href = '/';
 			} else {
-				alert(`Error: ${result.message}`);
+				console.error(`Error: ${result.message}`);
 			}
 		} catch (error) {
 			console.error('Failed to delete account:', error);
