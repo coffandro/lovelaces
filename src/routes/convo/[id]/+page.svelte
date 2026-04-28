@@ -74,15 +74,21 @@
 		}
 	}
 
+	function conversationHasEnded() {
+		alert('This conversation has ended.');
+	}
+
 	onMount(() => {
 		const es = new EventSource(`/convo/${data.convo.id}/stream`);
 		es.addEventListener('message', (e) => {
 			const msg = JSON.parse(e.data) as Message;
+
 			if (msg.userId === -1) {
-				alert('This conversation has ended.');
+				conversationHasEnded();
 				es.close();
 				return;
 			}
+
 			messages = [...messages, msg];
 		});
 		es.onerror = (e) => {
