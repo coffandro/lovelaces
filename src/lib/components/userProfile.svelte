@@ -2,9 +2,11 @@
 	import { GenderString, GetUserIcon, PronounString, SexualityString, type User } from '$lib/user';
 
 	let {
-		user
+		user,
+		isPublic = false
 	}: {
 		user: User;
+		isPublic: boolean;
 	} = $props();
 </script>
 
@@ -16,10 +18,15 @@
 	/>
 	<div class="flex flex-col gap-2 rounded-lg bg-light p-2 text-lg">
 		<h2 class="text-3xl font-medium">{user.name}</h2>
-		<div class="flex justify-items-stretch gap-2">
-			<div class="grow rounded bg-lighter p-1 text-center">{user.email}</div>
-			<div class="grow rounded bg-lighter p-1 text-center">{user.phone}</div>
-		</div>
+		{#if !isPublic}
+			<div class="border-3 border-dashed border-lighter p-1">
+				<h2>Not shown on public profile</h2>
+				<div class="flex justify-items-stretch gap-2">
+					<div class="grow rounded bg-lighter p-1 text-center">{user.email}</div>
+					<div class="grow rounded bg-lighter p-1 text-center">{user.phone}</div>
+				</div>
+			</div>
+		{/if}
 		<div class="flex justify-items-stretch gap-2">
 			<div class="grow rounded bg-lighter p-1 text-center">
 				{PronounString(user.pronouns)}

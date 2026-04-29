@@ -88,7 +88,7 @@ export function GenderString(gender: Gender): string {
             return "Man";
 
         case Gender.WOMAN:
-            return "Women";
+            return "Woman";
 
         case Gender.NONBINARY:
             return "Non-Binary";

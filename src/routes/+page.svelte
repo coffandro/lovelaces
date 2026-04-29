@@ -47,7 +47,7 @@
 		</Navbar>
 
 		<section>
-			<UserProfile user={data.user} />
+			<UserProfile user={data.user} isPublic={false} />
 		</section>
 
 		<footer>

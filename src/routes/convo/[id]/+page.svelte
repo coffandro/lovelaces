@@ -8,6 +8,7 @@
 	import Navbar from '$lib/components/navbar/navbar.svelte';
 	import { faUser } from '@fortawesome/free-solid-svg-icons';
 	import UserProfile from '$lib/components/userProfile.svelte';
+	import { redirect } from '@sveltejs/kit';
 
 	let { data }: PageProps = $props();
 
@@ -76,6 +77,7 @@
 
 	function conversationHasEnded() {
 		alert('This conversation has ended.');
+		redirect(303, '/');
 	}
 
 	onMount(() => {
@@ -127,8 +129,8 @@
 				console.error(`Error: ${result.message}`);
 			}
 		} catch (error) {
-			console.error('Failed to delete account:', error);
-			alert('Failed to delete account. Please try again.');
+			console.error('Failed to end conversation:', error);
+			alert('Failed to end conversation. Please try again.');
 		}
 	}
 
@@ -153,7 +155,7 @@
 	</Navbar>
 
 	{#if showingProfile && other}
-		<UserProfile user={other} />
+		<UserProfile user={other} isPublic={true} />
 	{:else}
 		<header class="mb-3 flex items-center justify-between rounded-lg bg-main p-2">
 			<div>
