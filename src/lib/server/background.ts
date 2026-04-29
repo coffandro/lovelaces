@@ -3,6 +3,10 @@ import * as db from '$lib/server/database';
 
 const INTERVAL: number = 100;
 
+export function startTick() {
+    setInterval(timeTick, INTERVAL);
+}
+
 function timeTick() {
     let currentConvos: Conversation[] = db.getConvos();
 
@@ -16,6 +20,3 @@ function timeTick() {
     }
 }
 
-export function startTick() {
-    setInterval(timeTick, INTERVAL);
-}
