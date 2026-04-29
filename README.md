@@ -1,42 +1,9 @@
-# sv
+# 10-minute love
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+For at start projektet kør `start.bat` i denne folder, hvis du har brug for at teste besked funktionaliteten åben yderligere et privat brower vindue og gå til http://localhost:3000 og login
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-bun x sv@0.15.0 create --template minimal --types ts --add prettier tailwindcss="plugins:none" eslint --install bun lovelaces
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Der er to tilgængenlige logins allerede konfigureret for demoer:
+| Navn      | email               | password     |
+|-----------|---------------------|--------------|
+| Eric      | eric@gmail.com      | Password1234 |
+| Josephine | josephine@gmail.com | Password1234 |
